@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (4.9.0)
+  - Kingfisher (4.10.1)
+  - MJRefresh (3.2.0)
+  - SnapKit (4.2.0)
+  - Then (2.6.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Kingfisher
+  - MJRefresh
+  - SnapKit
+  - Then
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Kingfisher
+    - MJRefresh
+    - SnapKit
+    - Then
+
+SPEC CHECKSUMS:
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
+
+PODFILE CHECKSUM: a76d5cd6aa394bcd86f6ec72b9a7746cda4b0696
+
+COCOAPODS: 1.7.5
