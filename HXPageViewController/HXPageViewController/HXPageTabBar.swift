@@ -593,12 +593,16 @@ extension HXPageTabBar {
         /// 更新选中状态
         let lastIndex = selectedIndex
         selectedIndex = index
-        var lastModel = itemModels[lastIndex]
-        var selectedModel = itemModels[selectedIndex]
-        lastModel.isSelected = false
-        selectedModel.isSelected = true
-        itemModels.replaceSubrange(lastIndex ..< lastIndex + 1, with: [lastModel])
-        itemModels.replaceSubrange(selectedIndex ..< selectedIndex + 1, with: [selectedModel])
+        var lastModel = itemModels[safe:lastIndex]
+        var selectedModel = itemModels[safe:selectedIndex]
+        lastModel?.isSelected = false
+        selectedModel?.isSelected = true
+        if let model = lastModel {
+            itemModels.replaceSubrange(lastIndex ..< lastIndex + 1, with: [model])
+        }
+        if let model = selectedModel {
+            itemModels.replaceSubrange(selectedIndex ..< selectedIndex + 1, with: [model])
+        }
         collectionView.reloadData()
         collectionView.scrollToItem(at: IndexPath(item: selectedIndex, section: 0), at: .centeredHorizontally, animated: true)
         /// 处理指示器

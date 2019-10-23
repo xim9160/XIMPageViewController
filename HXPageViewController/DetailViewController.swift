@@ -28,26 +28,26 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear: \(text)")
+        print("xim viewWillAppear: \(text)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear: \(text)")
+        print("xim viewDidAppear: \(text)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear: \(text)")
+        print("xim viewWillDisappear: \(text)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("viewDidDisappear: \(text)")
+        print("xim viewDidDisappear: \(text)")
     }
 
     deinit {
-        print("deinit: \(text)")
+        print("xim deinit: \(text)")
     }
     
 }

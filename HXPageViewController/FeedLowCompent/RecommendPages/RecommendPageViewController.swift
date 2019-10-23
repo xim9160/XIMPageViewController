@@ -9,17 +9,25 @@
 import UIKit
 import MJRefresh
 import SnapKit
+import Kingfisher
 
 let cellClsNameBase = "UITableViewCell"
 let identifierBase = "RecommendPageViewController_\(cellClsNameBase)"
 
 let headlineCellIdentifity = "headlineCellIdentifity"
 let cailianCellIdentifity = "cailianlistCellIdentifity"
-let contentCellIdentifity = "contentCellIdentifity"
+let contentCellImgIdentifity = "contentCellImgIdentifity"
+let contentCellTitleIdentifity = "contentCellTitleIdentifity"
 
 let headlineViewTag = 1001
 let cailianViewTag = headlineViewTag + 1
 
+//todo xiaofengmin to remove
+let oneLineHeight = HomePageCellConfig.height("")
+
+
+/// 下面两个为了后续 更多样式 预留
+/*
 enum CellType {
     case CarouselMap
     case RightPicture
@@ -27,8 +35,9 @@ enum CellType {
     case BigPicture
     case NonePicture
     case ThreePicture
-}
+}*/
 
+/*
 struct CellModel {
     var text:String
     var date:String
@@ -36,7 +45,7 @@ struct CellModel {
     var numberOfComments:CGFloat
     var imgData:Data?
     var type:CellType!
-}
+}*/
 
 class RecommendPageViewController: UIViewController {
     
@@ -48,6 +57,7 @@ class RecommendPageViewController: UIViewController {
     
     lazy var headlineView:LLCycleScrollView = {
         var headlineView = LLCycleScrollView.llCycleScrollViewWithFrame(.zero)
+        headlineView.layer.cornerRadius = 4
         headlineView.lldidSelectItemAtIndex = { (index) in
             print("当前点击文本的位置为 headLine:\(index)")
         }
@@ -73,9 +83,13 @@ class RecommendPageViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(NSClassFromString(cellClsNameBase), forCellReuseIdentifier: identifierBase)
+        tableView.register(FeedLowImgCell.self, forCellReuseIdentifier: contentCellImgIdentifity)
+        tableView.register(FeedLowTitleCell.self, forCellReuseIdentifier: contentCellTitleIdentifity)
+        
         tableView.register(NSClassFromString(cellClsNameBase), forCellReuseIdentifier: headlineCellIdentifity)
         tableView.register(NSClassFromString(cellClsNameBase), forCellReuseIdentifier: cailianCellIdentifity)
+        
+        tableView.separatorStyle = .none
         
         weak var weakSelf = self
         let header = MJRefreshNormalHeader.init(refreshingBlock: {
@@ -143,7 +157,9 @@ extension RecommendPageViewController:UITableViewDelegate, UITableViewDataSource
         case 0:
             number = dataCenter.headlineList.count > 0 ? 1:0
         case 1:
-            number = dataCenter.cailianlist.count > 0 ? 1:0
+            //todo xiaofengmin UI 这一块看接口
+//            number = dataCenter.cailianlist.count > 0 ? 1:0
+            return 0
         case 2:
             number = dataCenter.contentlist.count
             
@@ -168,7 +184,10 @@ extension RecommendPageViewController:UITableViewDelegate, UITableViewDataSource
                 cell.contentView.addSubview(headlineView)
                 
                 headlineView.snp.makeConstraints { (maker) in
-                    maker.left.right.bottom.top.equalToSuperview()
+                    maker.left.equalToSuperview().offset(HomePageCellConfig.base_offset_left)
+                    maker.right.equalToSuperview().offset(HomePageCellConfig.base_offset_right)
+                    maker.top.equalToSuperview().offset(HomePageCellConfig.headLine_top)
+                    maker.bottom.equalToSuperview().offset(HomePageCellConfig.headLine_bottom)
                 }
                 
             }
@@ -195,7 +214,6 @@ extension RecommendPageViewController:UITableViewDelegate, UITableViewDataSource
                 cailianView.snp.makeConstraints { (maker) in
                     maker.width.height.top.equalToSuperview()
                 }
-//                cailianView.frame = CGRect(x: 0, y: 0, width: 300, height: )
                 cailianView.backgroundColor = .red
                 
             }
@@ -211,18 +229,65 @@ extension RecommendPageViewController:UITableViewDelegate, UITableViewDataSource
             
             return cell
         case 2:
-            let model = dataCenter.contentlist[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifierBase)!
-            cell.textLabel?.text = model.title
-            cell.imageView?.image = nil
-            cell.detailTextLabel?.text = nil
-            return cell
+            let model = dataCenter.contentlist[safe:indexPath.row]
+//            model.
+            //todo xiaofengmin 1/2 调试时使用, 具体接口给出后规则需要变更
+            let withImg = indexPath.row % 2
+            
+            if withImg == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: contentCellImgIdentifity) as! FeedLowImgCell
+                cell.imgView.kf.setImage(with: URL(string:model?.images?[safe:0] ?? ""))
+                cell.titleLabel.text = model?.title
+                cell.tagLabel.removeFromSuperview()//暂时不支持
+                cell.sourceLabel.text = model?.authorName
+//todo xiaofengmin 阅读数量, 评论数量 点赞数量, 规则需要处理下
+                cell.commentLabel.text = "\(Int(model?.watchNum ?? 0))阅"
+                cell.dateLabel.text = model?.descriptionTime
+                
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: contentCellTitleIdentifity) as! FeedLowTitleCell
+                cell.titleLabel.text = model?.title
+                cell.tagLabel.removeFromSuperview()//暂时不支持
+                cell.sourceLabel.text = model?.authorName
+                //todo xiaofengmin 阅读数量, 评论数量 点赞数量, 规则需要处理下
+                cell.commentLabel.text = "\(Int(model?.watchNum ?? 0))阅"
+                cell.dateLabel.text = model?.descriptionTime
+                return cell
+            }
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifierBase)!
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return HomePageCellConfig.headLine_height
+        case 1:
+            return HomePageCellConfig.cell_height
+        case 2:
+            //todo xiaofengmin
+            let withImg = indexPath.row % 2
+            let model = dataCenter.contentlist[safe: indexPath.row]
+            if withImg == 1 {
+                return HomePageCellConfig.cell_height
+            } else {
+                let labelheight = HomePageCellConfig.height(model?.title ?? "")
+                if labelheight > oneLineHeight + 1 {
+                    return HomePageCellConfig.cell_height
+                } else {
+                    return HomePageCellConfig.cell_height_one_line
+                }
+            }
+        default:
+            return HomePageCellConfig.cell_height
+        }
+    }
+    
 }
 
 

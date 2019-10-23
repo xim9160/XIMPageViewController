@@ -8,9 +8,11 @@
 
 import UIKit
 import Alamofire
-
-let testUlr = "http://39.107.127.12/server/appHomePage/app/list?currentPage=0&showCount=2"
-let serverURL = "http://39.107.127.12/server"
+//www.wogoo.com
+//39.107.127.12
+//todo xiaofengmin server URL
+let testUrl = "http://39.107.127.12/server/appHomePage/app/list?currentPage=0&showCount=2"
+let serverURL = "http://www.wogoo.com/server"
 let bussinessURL = "/appHomePage/app/list"
 
 typealias completeBlock = (State, String?) -> Void

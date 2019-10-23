@@ -11,16 +11,29 @@ import UIKit
 let navigationHeight = UIApplication.shared.statusBarFrame.height + 44
 let searchBarHeight = 44
 
-class FeedLowHomePageViewController: UIViewController {
+public class FeedLowHomePageViewController: UIViewController {
+    
+    /// tabbar 显示的标题
+    private var titles:[String] {
+        get {
+            return config.titles
+        }
+    }
+    
+    
+    /// tabbar config
+    private var config = FeedLowHomeChannelConfig()
 
-    private let titles = ["推荐", "沪深", "港股", "美股", "7x24"]
-
+    
+    /// 搜索栏
     private lazy var searchBar: UIView = {
         let v = UIView()
         v.backgroundColor = .red
         return v
     }()
     
+    
+    /// 顶部tabbar
     private lazy var pageTabBar: HXPageTabBar = {
         let pageTabBar = HXPageTabBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + 44, width: UIScreen.main.bounds.width, height: 50))
         pageTabBar.dataSource = self
@@ -28,9 +41,10 @@ class FeedLowHomePageViewController: UIViewController {
         return pageTabBar
     }()
     
-    private lazy var pageTabBarMenu: UIView = {
-        let v = UIView()
+    private lazy var pageTabBarMenu: UIButton = {
+        let v = UIButton()
         v.backgroundColor = .orange
+        v.addTarget(self, action: #selector(showChannelEditPage), for: .touchUpInside)
         return v
     }()
     
@@ -42,7 +56,7 @@ class FeedLowHomePageViewController: UIViewController {
         return pageContainer
     }()
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         addChild(pageContainer)
         pageContainer.didMove(toParent: self)
@@ -53,17 +67,17 @@ class FeedLowHomePageViewController: UIViewController {
         view.addSubview(searchBar)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidLayoutSubviews() {
+    override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.view.setNeedsUpdateConstraints()
     }
     
-    override func updateViewConstraints() {
+    override public func updateViewConstraints() {
         super.updateViewConstraints()
         
         searchBar.snp.makeConstraints { (maker) in
@@ -90,14 +104,41 @@ class FeedLowHomePageViewController: UIViewController {
             maker.left.right.bottom.equalTo(self.view)
         }
         
-        
-        
     }
     
     func reload(_ sender: Any) {
         pageTabBar.setSelectedIndex(0, shouldHandleContentScrollView: true)
     }
     
+}
+
+
+//MARK: - BUTTON EVENT
+extension FeedLowHomePageViewController {
+    
+    @objc func showChannelEditPage() {
+        //todo xiaofengmin 
+        let topList = ChannelModelCreater.channelUntilModels(isTop: true, config.titles)
+        let bottomList = ChannelModelCreater.channelUntilModels(isTop: false, config.hideTitles)
+        
+        let selectVC = ChannelEditController(topDataSource: topList, andBottomDataSource: bottomList)!
+        weak var weakSelf = self
+        selectVC.disAppearBlock = { (showList, hideList) in
+            weakSelf?.config.saveConfig(modeles:showList as! [ChannelUnitModel])
+            weakSelf?.config.reloadTitles()
+            weakSelf?.pageContainer.reloadData()
+            let index = weakSelf?.pageContainer.currentIndex
+//            let tabIndex = weakSelf?.pageTabBar.selectedIndex
+            weakSelf?.pageTabBar.setSelectedIndex(index ?? 0, shouldHandleContentScrollView: true)
+            weakSelf?.pageTabBar.reloadData()
+        }
+        selectVC.chooseIndexBlock = {(index, showList, hideList) in
+            print(index)
+        }
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.pushViewController(selectVC, animated: true)
+        
+    }
 }
 
 // MARK: -  HXPageContainerDelegate, HXPageContainerDataSource
@@ -108,13 +149,23 @@ extension FeedLowHomePageViewController: HXPageContainerDelegate, HXPageContaine
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, childViewContollerAt index: Int) -> UIViewController {
-        if index == 0 {
-            let detailVC = RecommendPageViewController()
-            return detailVC
+        //todo xiaofengmin 这里需要按照给定的接口进行处理
+        let title = titles[safe:index] ?? "default"
+        if let vc = config.controllers[title] {
+            return vc
         } else {
-            let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
-            detailVC.text = titles[index]
-            return detailVC
+            
+            let defaultVc = UIViewController.init()
+            
+            let cls = config.map(title) as? UIViewController.Type
+            let vcClass: AnyClass? = cls
+            guard let typeClass = vcClass as? UIViewController.Type else {
+                return defaultVc
+            }
+            let vc = typeClass.init()
+            config.controllers[title] = vc
+            
+            return vc
         }
     }
     
@@ -123,26 +174,24 @@ extension FeedLowHomePageViewController: HXPageContainerDelegate, HXPageContaine
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, willTransition fromVC: UIViewController, toVC: UIViewController) {
-        print("willTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
+//        print("xim willTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, didFinishedTransition fromVC: UIViewController, toVC: UIViewController) {
-        print("didFinishedTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
+//        print("xim didFinishedTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, didCancelledTransition fromVC: UIViewController, toVC: UIViewController) {
-        print("didCancelledTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
+//        print("xim didCancelledTransition: \(pageContainer.currentIndex) fromVC: \(fromVC) toVC: \(toVC)")
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, dragging fromIndex: Int, toIndex: Int, percent: CGFloat) {
-        print("dragging: \(pageContainer.currentIndex) fromIndex: \(fromIndex) toIndex: \(toIndex) percent: \(percent)")
+//        print("xim dragging: \(pageContainer.currentIndex) fromIndex: \(fromIndex) toIndex: \(toIndex) percent: \(percent)")
     }
     
     func pageContainer(_ pageContainer: HXPageContainer, didSelected index: Int) {
         pageTabBar.setSelectedIndex(index, shouldHandleContentScrollView: true)
     }
-    
-    
 
 }
 
@@ -159,6 +208,31 @@ extension FeedLowHomePageViewController: HXPageTabBarDataSource, HXPageTabBarDel
     
     func defaultSelectedIndex(in pageTabBar: HXPageTabBar) -> Int {
         return 0
+    }
+    
+    func colorForIndicatorView(in pageTabBar: HXPageTabBar) -> UIColor {
+        return HomePageCellConfig.red_color
+    }
+    
+    func titleColorForItem(in pageTabBar: HXPageTabBar) -> UIColor {
+        return HomePageCellConfig.title_default_color!
+    }
+    
+    
+    func titleHighlightedFontForItem(in pageTabBar: HXPageTabBar) -> UIFont {
+        return .boldSystemFont(ofSize: HomePageCellConfig.tabbar_title_font)
+    }
+    
+    func titleFontForItem(in pageTabBar: HXPageTabBar) -> UIFont {
+        return .italicSystemFont(ofSize: HomePageCellConfig.tabbar_title_font)
+    }
+    
+    func titleHighlightedColorForItem(in pageTabBar: HXPageTabBar) -> UIColor {
+        return HomePageCellConfig.title_color!
+    }
+    
+    func pageTabBar(_ pageTabBar: HXPageTabBar, widthForIndicatorViewAt index: Int) -> CGFloat {
+        return 16
     }
     
 }

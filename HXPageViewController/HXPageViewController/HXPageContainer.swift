@@ -367,16 +367,18 @@ extension HXPageContainer {
     private func endTransitionChildViewController(fromIndex: Int, toIndex: Int) {
         guard let oldController = childViewController(at: fromIndex),
             let newController = childViewController(at: toIndex) else { return }
+        
         if potentialIndex == currentIndex { /// 已切换
             oldController.endAppearanceTransition()
             newController.endAppearanceTransition()
+            print("xim current = ")
             /// 代理回调
             delegate?.pageContainer?(self, didFinishedTransition: oldController, toVC: newController)
             delegate?.pageContainer?(self, didSelected: currentIndex)
         } else {  /// 未切换
             oldController.beginAppearanceTransition(true, animated: true)
             oldController.endAppearanceTransition()
-            
+            print("xim current !=")
             newController.beginAppearanceTransition(false, animated: true)
             newController.endAppearanceTransition()
             /// 代理回调
@@ -453,16 +455,26 @@ extension HXPageContainer: UIScrollViewDelegate {
         if !scrollView.isTracking && !scrollView.isDecelerating {
             return
         }
+        
         let diffX = scrollView.contentOffset.x - lastOffsetX
         let percent = abs(diffX / scrollView.bounds.width)
         
         /// 滑动状态回调
         delegate?.pageContainer?(self, dragging: currentIndex, toIndex: potentialIndex, percent: percent)
+        
+        if (percent > 1.0) {
+            endUpdateChildViewControllers()
+            hasProcessAppearance = true
+            beginUpdateChildViewControllers()
+            return
+        }
+        
+        
         if diffX > 0 { /// 向左
             if !hasProcessAppearance || potentialIndex != currentIndex + 1 {
                 hasProcessAppearance = true
                 /// 如果已经向右滑动过又向左滑动
-                if potentialIndex == currentIndex - 1 {
+                if potentialIndex < currentIndex - 1 {
                     endTransitionChildViewController(fromIndex: currentIndex, toIndex: potentialIndex)
                 }
                 potentialIndex = currentIndex + 1
@@ -473,18 +485,12 @@ extension HXPageContainer: UIScrollViewDelegate {
             if !hasProcessAppearance || potentialIndex != currentIndex - 1 {
                 hasProcessAppearance = true
                 /// 如果已经向左滑动过又向右滑动
-                if potentialIndex == currentIndex + 1 {
+                if potentialIndex > currentIndex + 1 {
                     endTransitionChildViewController(fromIndex: currentIndex, toIndex: potentialIndex)
                 }
                 potentialIndex = currentIndex - 1
                 beginUpdateChildViewControllers()
             }
-        }
-        
-        if percent >= 1.0 {
-            print("xfm \(currentIndex) to \(potentialIndex)")
-            currentIndex = potentialIndex
-            endUpdateChildViewControllers()
         }
     }
     
