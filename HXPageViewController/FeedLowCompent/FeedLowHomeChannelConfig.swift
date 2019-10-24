@@ -12,7 +12,7 @@ import UIKit
 public struct FeedLowHomeChannelConfig {
     
     static let saveKey = "FeedLowHomePageConfig_\("USER_ID")_TITLES"
-    static let defaultTitles = ["推荐", "沪深", "港股", "美股", "7x24小时", "其他"]
+    static let defaultTitles = ["推荐", "沪深", "港股", "美股", "7x24", "其他"]
     static let defaultHideTitles = ["新闻", "全部", "资讯", "调试", "其他", "7x64"]
     
     var controllers:[String:UIViewController] = [String:UIViewController]()
@@ -47,6 +47,8 @@ public struct FeedLowHomeChannelConfig {
         switch title {
         case "推荐":
             return RecommendPageViewController.self
+        case "7x24":
+            return NewsletterController.self
         default:
             return DetailViewController.self
         }

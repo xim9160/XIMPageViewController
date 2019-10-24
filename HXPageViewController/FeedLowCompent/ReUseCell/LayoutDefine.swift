@@ -41,6 +41,8 @@ public struct HomePageCellConfig {
     static let headLine_height:CGFloat = 152.0
     static let titleLabel_max_height = 45
     
+    static let headView_height:CGFloat = 44.0
+    
     //MARK: - COLOR
     static let title_color = UIColor.init("333333")
     static let title_default_color = UIColor.init("666666")

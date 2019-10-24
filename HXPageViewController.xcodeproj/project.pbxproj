@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		030B8F9923596A1400A5AA36 /* FeedLowHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B8F9823596A1400A5AA36 /* FeedLowHomePageViewController.swift */; };
+		031E8F6D23607C5500E481B0 /* RecommendModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F6C23607C5500E481B0 /* RecommendModels.swift */; };
+		031E8F7223607CE300E481B0 /* NewsletterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7123607CE300E481B0 /* NewsletterModels.swift */; };
+		031E8F7C23614AE500E481B0 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7B23614AE500E481B0 /* ServerURL.swift */; };
+		031E8F7E23614E1600E481B0 /* NewsletterDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */; };
+		031E8F822361810400E481B0 /* NewsletterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F812361810400E481B0 /* NewsletterController.swift */; };
+		031E8F842361870200E481B0 /* CailianCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F832361870200E481B0 /* CailianCell.swift */; };
 		0364F6422359B45400308722 /* RecommendPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F6412359B45400308722 /* RecommendPageViewController.swift */; };
 		0364F645235D5AC800308722 /* FeedLowDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F644235D5AC800308722 /* FeedLowDataCenter.swift */; };
 		0364F64E235DDC0D00308722 /* LLViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F647235DDC0C00308722 /* LLViewExtensions.swift */; };
@@ -19,7 +25,7 @@
 		0364F654235DDC0D00308722 /* LLImagePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F64D235DDC0C00308722 /* LLImagePageControl.swift */; };
 		0364F657235EA63C00308722 /* DataCenterModeles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F656235EA63C00308722 /* DataCenterModeles.swift */; };
 		0364F65B235EA69000308722 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F65A235EA69000308722 /* ArrayExtension.swift */; };
-		0364F65D235EB16000308722 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F65C235EB16000308722 /* DataCenter.swift */; };
+		0364F65D235EB16000308722 /* DataCenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F65C235EB16000308722 /* DataCenterProtocol.swift */; };
 		0364F660235EDA3100308722 /* FeedLowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F65F235EDA3100308722 /* FeedLowCell.swift */; };
 		0364F66B235EE1E000308722 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F663235EE1E000308722 /* UICollectionView+Reusable.swift */; };
 		0364F66C235EE1E000308722 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F664235EE1E000308722 /* Reusable.swift */; };
@@ -56,6 +62,12 @@
 
 /* Begin PBXFileReference section */
 		030B8F9823596A1400A5AA36 /* FeedLowHomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLowHomePageViewController.swift; sourceTree = "<group>"; };
+		031E8F6C23607C5500E481B0 /* RecommendModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendModels.swift; sourceTree = "<group>"; };
+		031E8F7123607CE300E481B0 /* NewsletterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterModels.swift; sourceTree = "<group>"; };
+		031E8F7B23614AE500E481B0 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
+		031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterDataCenter.swift; sourceTree = "<group>"; };
+		031E8F812361810400E481B0 /* NewsletterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterController.swift; sourceTree = "<group>"; };
+		031E8F832361870200E481B0 /* CailianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CailianCell.swift; sourceTree = "<group>"; };
 		0364F6412359B45400308722 /* RecommendPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPageViewController.swift; sourceTree = "<group>"; };
 		0364F644235D5AC800308722 /* FeedLowDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLowDataCenter.swift; sourceTree = "<group>"; };
 		0364F647235DDC0C00308722 /* LLViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLViewExtensions.swift; sourceTree = "<group>"; };
@@ -67,7 +79,7 @@
 		0364F64D235DDC0C00308722 /* LLImagePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLImagePageControl.swift; sourceTree = "<group>"; };
 		0364F656235EA63C00308722 /* DataCenterModeles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenterModeles.swift; sourceTree = "<group>"; };
 		0364F65A235EA69000308722 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
-		0364F65C235EB16000308722 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
+		0364F65C235EB16000308722 /* DataCenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenterProtocol.swift; sourceTree = "<group>"; };
 		0364F65F235EDA3100308722 /* FeedLowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLowCell.swift; sourceTree = "<group>"; };
 		0364F663235EE1E000308722 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		0364F664235EE1E000308722 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -127,18 +139,37 @@
 			children = (
 				030B8F9823596A1400A5AA36 /* FeedLowHomePageViewController.swift */,
 				0364F6952360279F00308722 /* FeedLowHomeChannelConfig.swift */,
+				0364F65E235EDA0400308722 /* ReUseCell */,
 				0364F655235EA61300308722 /* DataModels */,
 				0364F643235D4ED200308722 /* DataSources */,
 				0364F6402359B41F00308722 /* RecommendPages */,
-				0364F65E235EDA0400308722 /* ReUseCell */,
+				031E8F6E23607C8E00E481B0 /* Newsletter */,
 			);
 			path = FeedLowCompent;
+			sourceTree = "<group>";
+		};
+		031E8F6E23607C8E00E481B0 /* Newsletter */ = {
+			isa = PBXGroup;
+			children = (
+				031E8F812361810400E481B0 /* NewsletterController.swift */,
+				031E8F7123607CE300E481B0 /* NewsletterModels.swift */,
+			);
+			path = Newsletter;
+			sourceTree = "<group>";
+		};
+		031E8F7A23614AC900E481B0 /* ServerData */ = {
+			isa = PBXGroup;
+			children = (
+				031E8F7B23614AE500E481B0 /* ServerURL.swift */,
+			);
+			path = ServerData;
 			sourceTree = "<group>";
 		};
 		0364F6402359B41F00308722 /* RecommendPages */ = {
 			isa = PBXGroup;
 			children = (
 				0364F6412359B45400308722 /* RecommendPageViewController.swift */,
+				031E8F6C23607C5500E481B0 /* RecommendModels.swift */,
 			);
 			path = RecommendPages;
 			sourceTree = "<group>";
@@ -146,8 +177,9 @@
 		0364F643235D4ED200308722 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				0364F65C235EB16000308722 /* DataCenter.swift */,
+				0364F65C235EB16000308722 /* DataCenterProtocol.swift */,
 				0364F644235D5AC800308722 /* FeedLowDataCenter.swift */,
+				031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -196,6 +228,7 @@
 			children = (
 				0364F672235EE53200308722 /* LayoutDefine.swift */,
 				0364F65F235EDA3100308722 /* FeedLowCell.swift */,
+				031E8F832361870200E481B0 /* CailianCell.swift */,
 			);
 			path = ReUseCell;
 			sourceTree = "<group>";
@@ -272,6 +305,7 @@
 				030B8F97235969C100A5AA36 /* FeedLowCompent */,
 				0364F676235FFB3500308722 /* ChannelEditController */,
 				AA64C21E21E4443C00A24C71 /* DemoLoadMoreViewController.swift */,
+				031E8F7A23614AC900E481B0 /* ServerData */,
 				AA66978421E346D10078B4AA /* DemoContainerViewController.swift */,
 				AA66977221E344790078B4AA /* AppDelegate.swift */,
 				AA64C22021E4575D00A24C71 /* DemoTabBarViewController.swift */,
@@ -439,20 +473,26 @@
 				AA64C22121E4575D00A24C71 /* DemoTabBarViewController.swift in Sources */,
 				0364F654235DDC0D00308722 /* LLImagePageControl.swift in Sources */,
 				0364F6892360213700308722 /* ChannelUnitModel.m in Sources */,
+				031E8F7E23614E1600E481B0 /* NewsletterDataCenter.swift in Sources */,
 				0364F68A2360213700308722 /* TouchView.m in Sources */,
 				0364F673235EE53200308722 /* LayoutDefine.swift in Sources */,
 				0364F64F235DDC0D00308722 /* LLPillPageControl.swift in Sources */,
+				031E8F822361810400E481B0 /* NewsletterController.swift in Sources */,
 				AAE5B5DD21E745FB00FD3D25 /* HXPageViewController.swift in Sources */,
 				0364F6962360279F00308722 /* FeedLowHomeChannelConfig.swift in Sources */,
 				0364F66B235EE1E000308722 /* UICollectionView+Reusable.swift in Sources */,
 				0364F657235EA63C00308722 /* DataCenterModeles.swift in Sources */,
 				AAE5B5DB21E7311400FD3D25 /* DemoSubPageViewController.swift in Sources */,
 				0364F690236025B400308722 /* ChannelModelCreater.swift in Sources */,
+				031E8F7223607CE300E481B0 /* NewsletterModels.swift in Sources */,
 				0364F645235D5AC800308722 /* FeedLowDataCenter.swift in Sources */,
 				0364F66F235EE1E000308722 /* NibOwnerLoadable.swift in Sources */,
 				0364F671235EE1E000308722 /* StoryboardBased.swift in Sources */,
-				0364F65D235EB16000308722 /* DataCenter.swift in Sources */,
+				0364F65D235EB16000308722 /* DataCenterProtocol.swift in Sources */,
+				031E8F7C23614AE500E481B0 /* ServerURL.swift in Sources */,
 				0364F66D235EE1E000308722 /* UITableView+Reusable.swift in Sources */,
+				031E8F842361870200E481B0 /* CailianCell.swift in Sources */,
+				031E8F6D23607C5500E481B0 /* RecommendModels.swift in Sources */,
 				0364F6422359B45400308722 /* RecommendPageViewController.swift in Sources */,
 				0364F64E235DDC0D00308722 /* LLViewExtensions.swift in Sources */,
 				AAE5B5D921E7310600FD3D25 /* DemoMatchViewController.swift in Sources */,

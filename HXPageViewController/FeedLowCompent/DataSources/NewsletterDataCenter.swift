@@ -1,18 +1,18 @@
 //
-//  FeedLowDataCenter.swift
+//  NewsletterDataCenter.swift
 //  HXPageViewController
 //
-//  Created by xiaofengmin on 2019/10/21.
+//  Created by xiaofengmin on 2019/10/24.
 //  Copyright © 2019 WHX. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
-class FeedLowDataCenter: NSObject, DataPageControlProtocol {
+class NewsletterDataCenter: NSObject, DataPageControlProtocol {
     
-    typealias D = RecommendPageModel
-    typealias B = RecommendPdModel
+    typealias D = NewsletterPageModel
+    typealias B = NewsletterModel
     
     var url = serverURL
     var path = bussinessURL
@@ -21,35 +21,37 @@ class FeedLowDataCenter: NSObject, DataPageControlProtocol {
     var totalPage:Int = 0
     var totalResult:Int = 0
     var currentPage:Int = 0
-
+    
     //data ary
-    var headlineList = [HeadLineModel]()
-    var cailianlist = [CailianModel]()
-    var contentlist = [ContentModel]()
+    var cailianlist = [String:[B]]()
+    var headList = [String]()
     
     var complete:completeBlock?
     
-    func parseData(_ model: D?) {
-        if model != nil {} else {return}
-        
-        var tmpHeadLineList = headlineList
-        if let newHeadList = model?.headlineList {
-            tmpHeadLineList += newHeadList
+    func parseData(_ model:D?) {
+
+        guard let modelList = model?.cailianlist else { return }
+
+        let tmpCailianlist = cailianlist
+
+        for model in modelList {
+            guard let month = model.date else { continue }
+            guard let monthList = model.list else { continue }
+
+            var finMonthList:[B] = [B]()
+
+            if let nowList = tmpCailianlist[month] {
+                finMonthList = nowList + monthList
+            } else {
+                headList.append(month)
+                finMonthList += monthList
+            }
+
+            finMonthList = finMonthList.handleFilter({ $0.ID })
+
+            cailianlist[month] = finMonthList
         }
 
-        var tmpCailianlist = cailianlist
-        if let newCailList = model?.cailianlist {
-            tmpCailianlist += newCailList
-        }
-
-        var tmpContentList = contentlist
-        if let newContentList = model?.contenList {
-            tmpContentList += newContentList
-        }
-
-        headlineList = tmpHeadLineList.handleFilter({ $0.articleID })
-        cailianlist = tmpCailianlist.handleFilter({ $0.ID })
-        contentlist = tmpContentList.handleFilter({ $0.articleID })
     }
     
     func completeAction(value:Any?, resultState:Bool) {
@@ -81,16 +83,20 @@ class FeedLowDataCenter: NSObject, DataPageControlProtocol {
     
 }
 
+
 //MARK: - DataPageControlProtocol
-extension FeedLowDataCenter {
+extension NewsletterDataCenter {
     
     //结果 Bool 类型可能不够, 需要增加 noMoreData 类型标志
     open func nextPage() {
-        let url = serverURL + bussinessURL
+        
+        let url = self.url + path
+        
         weak var weakSelf = self
         requestData(url: url, parameters: ["currentPage":currentPage + 1, "showCount":self.showCount])
         { (value, result) in
             weakSelf?.completeAction(value:value, resultState:result)
+
         }
     }
     
@@ -99,9 +105,8 @@ extension FeedLowDataCenter {
         totalResult = 0
         currentPage = 0
         
-        headlineList.removeAll()
         cailianlist.removeAll()
-        contentlist.removeAll()
+        headList.removeAll()
     }
     
     open func lastestPage() {
@@ -109,7 +114,7 @@ extension FeedLowDataCenter {
         nextPage()
     }
     
-    func updatePage<B>(_ model: PageModel<B>?) -> Bool where B : Decodable, B : Encodable {
+    func updatePage<T>(_ model: PageModel<T>?) -> Bool where T : Decodable, T : Encodable {
         
         if model != nil {
             self.currentPage = model?.currentPage ?? currentPage + 1

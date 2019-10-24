@@ -147,9 +147,6 @@ extension RecommendPageViewController {
     }
 }
 
-extension RecommendPageViewController {
-}
-
 extension RecommendPageViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var number = 0
