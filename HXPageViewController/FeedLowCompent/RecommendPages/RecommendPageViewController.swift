@@ -92,13 +92,14 @@ class RecommendPageViewController: UIViewController {
         tableView.separatorStyle = .none
         
         weak var weakSelf = self
-        let header = MJRefreshNormalHeader.init(refreshingBlock: {
+        let header = MJRefreshCireHeader.init(refreshingBlock: {
             weakSelf?.dataCenter.lastestPage()
         })
         
-        let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+        let footer = MJRefreshCireFooter.init(refreshingBlock: {
             weakSelf?.dataCenter.nextPage()
         })
+                
         
         tableView.mj_header = header
         tableView.mj_footer = footer

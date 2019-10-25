@@ -14,6 +14,9 @@
 		031E8F7E23614E1600E481B0 /* NewsletterDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */; };
 		031E8F822361810400E481B0 /* NewsletterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F812361810400E481B0 /* NewsletterController.swift */; };
 		031E8F842361870200E481B0 /* NewletterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F832361870200E481B0 /* NewletterCell.swift */; };
+		03329CDC2362E1A8001E1826 /* CireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03329CDB2362E1A8001E1826 /* CireView.swift */; };
+		03329CDE2362FDF9001E1826 /* MJRefreshStateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03329CDD2362FDF9001E1826 /* MJRefreshStateHeader.swift */; };
+		03329CE02362FE28001E1826 /* MJRefreshStateFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03329CDF2362FE28001E1826 /* MJRefreshStateFooter.swift */; };
 		0364F6422359B45400308722 /* RecommendPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F6412359B45400308722 /* RecommendPageViewController.swift */; };
 		0364F645235D5AC800308722 /* FeedLowDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F644235D5AC800308722 /* FeedLowDataCenter.swift */; };
 		0364F64E235DDC0D00308722 /* LLViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F647235DDC0C00308722 /* LLViewExtensions.swift */; };
@@ -68,6 +71,9 @@
 		031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterDataCenter.swift; sourceTree = "<group>"; };
 		031E8F812361810400E481B0 /* NewsletterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterController.swift; sourceTree = "<group>"; };
 		031E8F832361870200E481B0 /* NewletterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewletterCell.swift; sourceTree = "<group>"; };
+		03329CDB2362E1A8001E1826 /* CireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CireView.swift; sourceTree = "<group>"; };
+		03329CDD2362FDF9001E1826 /* MJRefreshStateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJRefreshStateHeader.swift; sourceTree = "<group>"; };
+		03329CDF2362FE28001E1826 /* MJRefreshStateFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJRefreshStateFooter.swift; sourceTree = "<group>"; };
 		0364F6412359B45400308722 /* RecommendPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPageViewController.swift; sourceTree = "<group>"; };
 		0364F644235D5AC800308722 /* FeedLowDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLowDataCenter.swift; sourceTree = "<group>"; };
 		0364F647235DDC0C00308722 /* LLViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLViewExtensions.swift; sourceTree = "<group>"; };
@@ -164,6 +170,16 @@
 				031E8F7B23614AE500E481B0 /* ServerURL.swift */,
 			);
 			path = ServerData;
+			sourceTree = "<group>";
+		};
+		03329CDA2362E187001E1826 /* CireView */ = {
+			isa = PBXGroup;
+			children = (
+				03329CDB2362E1A8001E1826 /* CireView.swift */,
+				03329CDD2362FDF9001E1826 /* MJRefreshStateHeader.swift */,
+				03329CDF2362FE28001E1826 /* MJRefreshStateFooter.swift */,
+			);
+			path = CireView;
 			sourceTree = "<group>";
 		};
 		0364F6402359B41F00308722 /* RecommendPages */ = {
@@ -299,6 +315,7 @@
 		AA66977121E344790078B4AA /* HXPageViewController */ = {
 			isa = PBXGroup;
 			children = (
+				03329CDA2362E187001E1826 /* CireView */,
 				0364F646235DDC0C00308722 /* LLCycleScrollView */,
 				AA66978821E347130078B4AA /* HXPageViewController */,
 				0364F658235EA67800308722 /* Extension */,
@@ -473,6 +490,7 @@
 				AA64C22121E4575D00A24C71 /* DemoTabBarViewController.swift in Sources */,
 				0364F654235DDC0D00308722 /* LLImagePageControl.swift in Sources */,
 				0364F6892360213700308722 /* ChannelUnitModel.m in Sources */,
+				03329CDE2362FDF9001E1826 /* MJRefreshStateHeader.swift in Sources */,
 				031E8F7E23614E1600E481B0 /* NewsletterDataCenter.swift in Sources */,
 				0364F68A2360213700308722 /* TouchView.m in Sources */,
 				0364F673235EE53200308722 /* LayoutDefine.swift in Sources */,
@@ -485,6 +503,7 @@
 				AAE5B5DB21E7311400FD3D25 /* DemoSubPageViewController.swift in Sources */,
 				0364F690236025B400308722 /* ChannelModelCreater.swift in Sources */,
 				031E8F7223607CE300E481B0 /* NewsletterModels.swift in Sources */,
+				03329CE02362FE28001E1826 /* MJRefreshStateFooter.swift in Sources */,
 				0364F645235D5AC800308722 /* FeedLowDataCenter.swift in Sources */,
 				0364F66F235EE1E000308722 /* NibOwnerLoadable.swift in Sources */,
 				0364F671235EE1E000308722 /* StoryboardBased.swift in Sources */,
@@ -506,6 +525,7 @@
 				AA66978A21E347D80078B4AA /* HXPageContentView.swift in Sources */,
 				AA66978F21E3525C0078B4AA /* DetailViewController.swift in Sources */,
 				AA66978721E3470D0078B4AA /* HXPageContainer.swift in Sources */,
+				03329CDC2362E1A8001E1826 /* CireView.swift in Sources */,
 				AA64C21F21E4443C00A24C71 /* DemoLoadMoreViewController.swift in Sources */,
 				AA64C22321E45B3E00A24C71 /* HXPageTabBar.swift in Sources */,
 				0364F653235DDC0D00308722 /* LLFilledPageControl.swift in Sources */,

@@ -32,14 +32,14 @@ class NewsletterController: UIViewController {
         tableView.estimatedRowHeight = 300
         
         weak var weakSelf = self
-        let header = MJRefreshNormalHeader.init(refreshingBlock: {
+        let header = MJRefreshCireHeader.init(refreshingBlock: {
             weakSelf?.dataCenter.lastestPage()
         })
         
-        let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+        let footer = MJRefreshCireFooter.init(refreshingBlock: {
             weakSelf?.dataCenter.nextPage()
         })
-        
+    
         tableView.mj_header = header
         tableView.mj_footer = footer
         
@@ -134,6 +134,10 @@ extension NewsletterController:UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         NewsletterConfig.headHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
