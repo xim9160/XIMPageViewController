@@ -15,7 +15,7 @@ class NewsletterDataCenter: NSObject, DataPageControlProtocol {
     typealias B = NewsletterModel
     
     var url = serverURL
-    var path = bussinessURL
+    var path = caiLianURL
     
     var showCount:Int = 10
     var totalPage:Int = 0
@@ -96,7 +96,6 @@ extension NewsletterDataCenter {
         requestData(url: url, parameters: ["currentPage":currentPage + 1, "showCount":self.showCount])
         { (value, result) in
             weakSelf?.completeAction(value:value, resultState:result)
-
         }
     }
     

@@ -27,19 +27,27 @@ class FeedLowImgCell: UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(imgView)
-//        self.contentView.addSubview(tagLabel)
-        self.contentView.addSubview(sourceLabel)
-        self.contentView.addSubview(commentLabel)
-        self.contentView.addSubview(dateLabel)
+        configSubviews()
         
+        self.setNeedsLayout()
         self.setNeedsUpdateConstraints()
+        
+        self.layoutIfNeeded()
+        self.updateConstraintsIfNeeded()
         
         configSubviews()
     }
     
     func configSubviews() {
+        
+        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(imgView)
+        //        self.contentView.addSubview(tagLabel)
+        self.contentView.addSubview(sourceLabel)
+        self.contentView.addSubview(commentLabel)
+        self.contentView.addSubview(dateLabel)
+        
+        
         //todo init with Color
         HomePageCellConfig.configTitle(titleLabel)
         HomePageCellConfig.configSubLabels(sourceLabel, commentLabel, dateLabel)
@@ -64,7 +72,7 @@ class FeedLowImgCell: UITableViewCell{
         }
         
         sourceLabel.snp.makeConstraints { (maker) in
-//            maker.left.equalTo(tagLabel.snp_right).offset(HomePageCellConfig.sub_text_sep).priorityHigh()
+            //            maker.left.equalTo(tagLabel.snp_right).offset(HomePageCellConfig.sub_text_sep).priorityHigh()
             maker.left.equalToSuperview().offset(HomePageCellConfig.base_offset_left)
             maker.height.equalTo(HomePageCellConfig.sub_text_font)
             maker.bottom.equalToSuperview().offset(HomePageCellConfig.sub_text_bottom)
@@ -149,7 +157,7 @@ class FeedLowTitleCell: UITableViewCell {
         //        }
         
         sourceLabel.snp.makeConstraints { (maker) in
-//            maker.left.equalTo(tagLabel.snp_right).offset(HomePageCellConfig.sub_text_sep).priorityHigh()
+            //            maker.left.equalTo(tagLabel.snp_right).offset(HomePageCellConfig.sub_text_sep).priorityHigh()
             maker.left.equalToSuperview().offset(HomePageCellConfig.base_offset_left).priorityMedium()
             maker.height.equalTo(HomePageCellConfig.sub_text_font)
             maker.bottom.equalToSuperview().offset(HomePageCellConfig.sub_text_bottom)

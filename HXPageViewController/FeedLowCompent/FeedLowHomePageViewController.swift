@@ -224,7 +224,7 @@ extension FeedLowHomePageViewController: HXPageTabBarDataSource, HXPageTabBarDel
     }
     
     func titleFontForItem(in pageTabBar: HXPageTabBar) -> UIFont {
-        return .italicSystemFont(ofSize: HomePageCellConfig.tabbar_title_font)
+        return .systemFont(ofSize: HomePageCellConfig.tabbar_title_font)
     }
     
     func titleHighlightedColorForItem(in pageTabBar: HXPageTabBar) -> UIColor {

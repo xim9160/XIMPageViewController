@@ -10,6 +10,9 @@ import Foundation
 import MJRefresh
 
 class NewsletterController: UIViewController {
+    
+    static let cellIdentifity = "NewsletterController_contentCell"
+    
     lazy var dataCenter:NewsletterDataCenter  = {
         let center = NewsletterDataCenter()
         center.complete = complete
@@ -21,13 +24,12 @@ class NewsletterController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(FeedLowImgCell.self, forCellReuseIdentifier: contentCellImgIdentifity)
-        tableView.register(FeedLowTitleCell.self, forCellReuseIdentifier: contentCellTitleIdentifity)
-        
-        tableView.register(NSClassFromString(cellClsNameBase), forCellReuseIdentifier: headlineCellIdentifity)
-        tableView.register(NSClassFromString(cellClsNameBase), forCellReuseIdentifier: cailianCellIdentifity)
+        tableView.register(NewletterCell.self, forCellReuseIdentifier: NewsletterController.cellIdentifity)
         
         tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        //todo xiaofengmin estimatedRowHeight
+        tableView.estimatedRowHeight = 300
         
         weak var weakSelf = self
         let header = MJRefreshNormalHeader.init(refreshingBlock: {
@@ -101,19 +103,69 @@ extension NewsletterController:UITableViewDelegate, UITableViewDataSource {
         guard let list = dataCenter.cailianlist[month] else { return UITableViewCell() }
         guard let model = list[safe: indexPath.row] else { return UITableViewCell() }
         
-        return UITableViewCell()
-        //creatCell and Set Data
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsletterController.cellIdentifity) as! NewletterCell
+        
+        cell.dateLabel.text = model.time
+        let attributeText = attributeStr(from: (model.brief ?? ""), with: (model.title ?? ""))
+        cell.contentLabel.attributedText = attributeText
+        cell.ID = model.ID
+        
+        return cell
 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let month = dataCenter.headList[safe:section] else { return nil }
-        let label = UILabel.init()
-        label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: HomePageCellConfig.headView_height)
-        label.text = month
         
-        return label
+        //todo xiaofengmin new view
+        let view = UIView.init()
+        view.backgroundColor = NewsletterConfig.headBackColor
+        
+        let label = UILabel.init()
+        label.frame = CGRect(x: CGFloat(HomePageCellConfig.base_offset_left), y: 0, width: UIScreen.main.bounds.width, height: NewsletterConfig.headHeight)
+        label.text = month
+        label.font = NewsletterConfig.headFont
+        label.textColor = NewsletterConfig.headFonColor
+        
+        view.addSubview(label)
+        
+        return view
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        NewsletterConfig.headHeight
+    }
     
+}
+
+extension NewsletterController {
+    // MARK: - AttributeString
+    func attributeStr(from content :String, with string:String) -> NSAttributedString {
+        let str:NSMutableAttributedString=NSMutableAttributedString.init(string:content)
+        guard let range = content.range(of: string) else { return str }
+        str.addAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: NewsletterConfig.titleFontSize),
+             NSAttributedString.Key.foregroundColor:NewsletterConfig.titleColor!],
+                          range:content.toNSRange(range))
+        return str
+
+    }
+}
+
+extension String {
+
+    func toNSRange(_ range: Range<String.Index>) -> NSRange {
+        guard let from = range.lowerBound.samePosition(in: utf16), let to = range.upperBound.samePosition(in: utf16) else {
+            return NSMakeRange(0, 0)
+        }
+        return NSMakeRange(utf16.distance(from: utf16.startIndex, to: from), utf16.distance(from: from, to: to))
+    }
+    
+    func toRange(_ range: NSRange) -> Range<String.Index>? {
+        guard let from16 = utf16.index(utf16.startIndex, offsetBy: range.location, limitedBy: utf16.endIndex) else { return nil }
+        guard let to16 = utf16.index(from16, offsetBy: range.length, limitedBy: utf16.endIndex) else { return nil }
+        guard let from = String.Index(from16, within: self) else { return nil }
+        guard let to = String.Index(to16, within: self) else { return nil }
+        return from ..< to
+    }
 }

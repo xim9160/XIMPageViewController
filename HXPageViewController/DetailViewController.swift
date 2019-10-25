@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    var text: String = ""
+    var text: String = "啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单啊发发大道附近考试款到发货看见爱上饭卡活动费卡上家 1好21就👌1金好金1金 回家环境👌就好久好久黄金色花交换机就我就是人家误会居委会认监委缓解危机如今而后王嘉尔好久好久很简单"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,23 @@ class DetailViewController: UIViewController {
         view.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
         
         titleLabel.text = text
+        
+        //todo xiaorengmin UILabel 自适应高度
+        titleLabel.backgroundColor = .red
+        
+        titleLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 100).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -100).isActive = true
+        titleLabel.numberOfLines = 0
+        titleLabel.setContentHuggingPriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
+//        titleLabel.preferredMaxLayoutWidth = 100
+        
+//        titleLabel.snp.updateConstraints { (maker) in
+//            maker.top.equalTo(200)
+////            maker.topMargin
+//            maker.centerX.equalToSuperview()
+//            maker.height.lessThanOrEqualTo(10000).priority(.low)
+//        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

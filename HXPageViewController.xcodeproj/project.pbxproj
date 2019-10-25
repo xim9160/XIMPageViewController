@@ -13,7 +13,7 @@
 		031E8F7C23614AE500E481B0 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7B23614AE500E481B0 /* ServerURL.swift */; };
 		031E8F7E23614E1600E481B0 /* NewsletterDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */; };
 		031E8F822361810400E481B0 /* NewsletterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F812361810400E481B0 /* NewsletterController.swift */; };
-		031E8F842361870200E481B0 /* CailianCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F832361870200E481B0 /* CailianCell.swift */; };
+		031E8F842361870200E481B0 /* NewletterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E8F832361870200E481B0 /* NewletterCell.swift */; };
 		0364F6422359B45400308722 /* RecommendPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F6412359B45400308722 /* RecommendPageViewController.swift */; };
 		0364F645235D5AC800308722 /* FeedLowDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F644235D5AC800308722 /* FeedLowDataCenter.swift */; };
 		0364F64E235DDC0D00308722 /* LLViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364F647235DDC0C00308722 /* LLViewExtensions.swift */; };
@@ -67,7 +67,7 @@
 		031E8F7B23614AE500E481B0 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
 		031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterDataCenter.swift; sourceTree = "<group>"; };
 		031E8F812361810400E481B0 /* NewsletterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterController.swift; sourceTree = "<group>"; };
-		031E8F832361870200E481B0 /* CailianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CailianCell.swift; sourceTree = "<group>"; };
+		031E8F832361870200E481B0 /* NewletterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewletterCell.swift; sourceTree = "<group>"; };
 		0364F6412359B45400308722 /* RecommendPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendPageViewController.swift; sourceTree = "<group>"; };
 		0364F644235D5AC800308722 /* FeedLowDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLowDataCenter.swift; sourceTree = "<group>"; };
 		0364F647235DDC0C00308722 /* LLViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLViewExtensions.swift; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				031E8F812361810400E481B0 /* NewsletterController.swift */,
+				031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */,
 				031E8F7123607CE300E481B0 /* NewsletterModels.swift */,
 			);
 			path = Newsletter;
@@ -179,7 +180,6 @@
 			children = (
 				0364F65C235EB16000308722 /* DataCenterProtocol.swift */,
 				0364F644235D5AC800308722 /* FeedLowDataCenter.swift */,
-				031E8F7D23614E1600E481B0 /* NewsletterDataCenter.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 			children = (
 				0364F672235EE53200308722 /* LayoutDefine.swift */,
 				0364F65F235EDA3100308722 /* FeedLowCell.swift */,
-				031E8F832361870200E481B0 /* CailianCell.swift */,
+				031E8F832361870200E481B0 /* NewletterCell.swift */,
 			);
 			path = ReUseCell;
 			sourceTree = "<group>";
@@ -491,7 +491,7 @@
 				0364F65D235EB16000308722 /* DataCenterProtocol.swift in Sources */,
 				031E8F7C23614AE500E481B0 /* ServerURL.swift in Sources */,
 				0364F66D235EE1E000308722 /* UITableView+Reusable.swift in Sources */,
-				031E8F842361870200E481B0 /* CailianCell.swift in Sources */,
+				031E8F842361870200E481B0 /* NewletterCell.swift in Sources */,
 				031E8F6D23607C5500E481B0 /* RecommendModels.swift in Sources */,
 				0364F6422359B45400308722 /* RecommendPageViewController.swift in Sources */,
 				0364F64E235DDC0D00308722 /* LLViewExtensions.swift in Sources */,
