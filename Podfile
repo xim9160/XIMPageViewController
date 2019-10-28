@@ -16,5 +16,8 @@ target 'HXPageViewController' do
     pod 'Then'
     pod 'MJRefresh'
   # Pods for HXPageViewController
+  
+    pod 'Moya'
+    pod 'ObjectMapper'
 
 end

@@ -49,8 +49,8 @@ struct CellModel {
 
 class RecommendPageViewController: UIViewController {
     
-    lazy var dataCenter:FeedLowDataCenter  = {
-        let center = FeedLowDataCenter()
+    lazy var dataCenter:RecommendDataCenter  = {
+        let center = RecommendDataCenter()
         center.complete = complete
         return center
     }()

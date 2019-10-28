@@ -1,5 +1,5 @@
 //
-//  FeedLowDataCenter.swift
+//  RecommendDataCenter.swift
 //  HXPageViewController
 //
 //  Created by xiaofengmin on 2019/10/21.
@@ -8,14 +8,12 @@
 
 import UIKit
 import Alamofire
+import Moya
 
-class FeedLowDataCenter: NSObject, DataPageControlProtocol {
+class RecommendDataCenter: NSObject, DataPageControlProtocol {
     
     typealias D = RecommendPageModel
     typealias B = RecommendPdModel
-    
-    var url = serverURL
-    var path = bussinessURL
     
     var showCount:Int = 10
     var totalPage:Int = 0
@@ -52,45 +50,33 @@ class FeedLowDataCenter: NSObject, DataPageControlProtocol {
         contentlist = tmpContentList.handleFilter({ $0.articleID })
     }
     
-    func completeAction(value:Any?, resultState:Bool) {
-        if let value = value {
-            var msg:String?
-            if let r = try? JSONModel(BaseResponseModel<D>.self, withKeyValues: value as! [String : Any]) {
-                
-                msg = r.resultMsg
-
-                if r.resultState == true {
-                    self.parseData(r.data)
-                    let moreData = self.updatePage(r.data?.page)
-                    
-                    if moreData {
-                        self.complete?(State.success, msg)
-                    } else {
-                        self.complete?(State.noMoreData, msg)
-                    }
-                } else {
-                    self.complete?(State.fail, r.resultMsg)
-                }
-            } else {
-                self.complete?(State.fail, nil)
-            }
-        } else {
-            self.complete?(State.fail, nil)
-        }
-    }
-    
 }
 
 //MARK: - DataPageControlProtocol
-extension FeedLowDataCenter {
+extension RecommendDataCenter {
     
     //结果 Bool 类型可能不够, 需要增加 noMoreData 类型标志
     open func nextPage() {
-        let url = serverURL + bussinessURL
-        weak var weakSelf = self
-        requestData(url: url, parameters: ["currentPage":currentPage + 1, "showCount":self.showCount])
-        { (value, result) in
-            weakSelf?.completeAction(value:value, resultState:result)
+        let provider = MoyaProvider<ValueStormApi>(requestClosure:requestTimeoutClosure)
+        provider.request(.service(type: .homeList, params: ["currentPage":currentPage + 1, "showCount":self.showCount])) { [unowned self] (result) in
+            var state = State.fail
+            switch result {
+            case let .success(response):
+                do {
+                    let model = try response.map(BaseResponseModel<D>.self)
+                    let pgModel = model.data
+                    self.parseData(pgModel)
+                    let moreData = self.updatePage(pgModel?.page)
+                    
+                    state = moreData ? State.success : State.noMoreData
+                } catch {
+                    print(error.localizedDescription)
+                }
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+            
+            self.complete?(state, nil)
         }
     }
     

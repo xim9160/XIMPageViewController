@@ -371,14 +371,12 @@ extension HXPageContainer {
         if potentialIndex == currentIndex { /// 已切换
             oldController.endAppearanceTransition()
             newController.endAppearanceTransition()
-            print("xim current = ")
             /// 代理回调
             delegate?.pageContainer?(self, didFinishedTransition: oldController, toVC: newController)
             delegate?.pageContainer?(self, didSelected: currentIndex)
         } else {  /// 未切换
             oldController.beginAppearanceTransition(true, animated: true)
             oldController.endAppearanceTransition()
-            print("xim current !=")
             newController.beginAppearanceTransition(false, animated: true)
             newController.endAppearanceTransition()
             /// 代理回调

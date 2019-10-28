@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 /// 配套 ChannelEditController 使用 方便 [String] -> [Models]
 public struct ChannelModelCreater {
     

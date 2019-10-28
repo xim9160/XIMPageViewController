@@ -27,5 +27,69 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C4164FB-3CB5-4C44-A979-0223F972BBFC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HXPageViewController/FeedLowCompent/Newsletter/NewsletterDataCenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "nextPage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6C4164FB-3CB5-4C44-A979-0223F972BBFC - 9d4eceb840c4ff13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Result.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in HXPageViewController.NewsletterDataCenter.nextPage() -&gt; ()"
+                  moduleName = "HXPageViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiaofengmin/Documents/workspace/XIMPageController/HXPageViewController/FeedLowCompent/Newsletter/NewsletterDataCenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "6C4164FB-3CB5-4C44-A979-0223F972BBFC - 9d4eceb840c4ff13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Result.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in HXPageViewController.NewsletterDataCenter.nextPage() -&gt; ()"
+                  moduleName = "HXPageViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiaofengmin/Documents/workspace/XIMPageController/HXPageViewController/FeedLowCompent/Newsletter/NewsletterDataCenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "405">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58A2AFE6-54CE-4BC5-8E77-0A6D723CE8C1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HXPageViewController/FeedLowCompent/Newsletter/NewsletterDataCenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "parseData(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

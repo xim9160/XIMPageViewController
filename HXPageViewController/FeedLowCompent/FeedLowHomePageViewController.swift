@@ -133,6 +133,7 @@ extension FeedLowHomePageViewController {
             weakSelf?.pageTabBar.reloadData()
         }
         selectVC.chooseIndexBlock = {(index, showList, hideList) in
+            //todo xiaofengmin
             print(index)
         }
         self.navigationController?.setNavigationBarHidden(false, animated: false)
